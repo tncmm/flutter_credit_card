@@ -1,8 +1,6 @@
 import 'dart:async';
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-
 import 'credit_card_background.dart';
 import 'flip_animation_builder.dart';
 import 'float_animation_builder.dart';
@@ -31,6 +29,7 @@ class CreditCardWidget extends StatefulWidget {
     required this.showBackView,
     required this.onCreditCardWidgetChange,
     this.bankName,
+    this.validThruTextStyle,
     this.animationDuration = AppConstants.defaultAnimDuration,
     this.height,
     this.width,
@@ -172,6 +171,8 @@ class CreditCardWidget extends StatefulWidget {
   /// The config for making the card float as per the movement of device or
   /// mouse pointer.
   final FloatingConfig floatingConfig;
+
+  final TextStyle? validThruTextStyle;
 
   /// floating animation enabled/disabled
   @override
@@ -359,7 +360,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
   }
 
   void _processFloatingEvent(FloatingEvent? event) {
-    if (!mounted || event == null || controller.isAnimating) {
+    if (event == null || controller.isAnimating) {
       return;
     }
 
@@ -481,61 +482,59 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
       padding: widget.padding,
       border: widget.frontCardBorder,
       shadowConfig: floatingShadowConfig,
+      validThruTextStyle: widget.validThruTextStyle,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          if (widget.bankName.isNotNullAndNotEmpty)
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.only(right: 16, top: 16),
-                child: Text(
-                  widget.bankName!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: defaultTextStyle,
-                ),
-              ),
-            ),
+          SizedBox(
+            height: 64,
+          ),
           Expanded(
-            flex: widget.isChipVisible ? 1 : 0,
+            flex: widget.isChipVisible ? 2 : 0,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 if (widget.isChipVisible)
                   Padding(
-                    padding: const EdgeInsetsDirectional.only(start: 16),
+                    padding: EdgeInsets.only(
+                      left: 16,
+                    ),
                     child: Image.asset(
                       AssetPaths.chip,
                       package: AppConstants.packageName,
                       color: widget.chipColor,
-                      scale: 1,
+                      scale: 0.5,
                     ),
                   ),
               ],
             ),
           ),
-          const SizedBox(height: 10),
+   
           Expanded(
-            child: Padding(
-              padding: const EdgeInsetsDirectional.only(start: 16),
-              child: Text(
-                widget.cardNumber.isEmpty ? AppConstants.sixteenX : number,
-                style: widget.textStyle ?? defaultTextStyle,
+            flex: 2,
+              child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsetsDirectional.only(start: 16,bottom: 8),
+                child: Text(
+                  widget.cardNumber.isEmpty ? AppConstants.sixteenX : number,
+                  style: widget.textStyle ?? defaultTextStyle,
+                ),
               ),
-            ),
-          ),
+            ],
+          )),
           Expanded(
-            flex: 1,
+            flex: 2,
             child: Padding(
               padding: const EdgeInsetsDirectional.only(start: 16),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
                     widget.labelValidThru,
-                    style: widget.textStyle ??
+                    style: widget.validThruTextStyle ??
                         defaultTextStyle.copyWith(fontSize: 7),
                     textAlign: TextAlign.center,
                   ),
