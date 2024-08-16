@@ -490,7 +490,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          
+          SizedBox(height: 56,),
           Expanded(
             flex: widget.isChipVisible ? 2 : 0,
             child: Row(
@@ -513,11 +513,11 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
           ),
    
           Expanded(
-            
+            flex: 2,
               child: Row(
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.only(start: 16,bottom: 8),
+                padding: const EdgeInsetsDirectional.only(start: 16,),
                 child: Text(
                   widget.cardNumber.isEmpty ? AppConstants.sixteenX : number,
                   style: widget.textStyle ?? defaultTextStyle,
@@ -551,7 +551,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16),
+            padding: const EdgeInsets.only(left: 16, right: 16, ),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
