@@ -23,6 +23,7 @@ class CardBackground extends StatelessWidget {
     this.floatingController,
     this.glarePosition,
     this.shadowConfig,
+    this.validThruTextStyle
     super.key,
   }) : assert(
           backgroundImage == null || backgroundNetworkImage == null,
@@ -42,6 +43,7 @@ class CardBackground extends StatelessWidget {
   final FloatingController? floatingController;
   final double? glarePosition;
   final FloatingShadowConfig? shadowConfig;
+  final TextStyle? validThruTextStyle;
 
   @override
   Widget build(BuildContext context) {
