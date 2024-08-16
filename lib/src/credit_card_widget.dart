@@ -55,11 +55,14 @@ class CreditCardWidget extends StatefulWidget {
     this.obscureInitialCardNumber = false,
     this.enableFloatingCard = false,
     this.floatingConfig = const FloatingConfig(),
+    this.expireDateTextStyle
     super.key,
   });
 
   /// A string indicating number on the card.
   final String cardNumber;
+
+  final TextStyle? expireDateTextStyle;
 
   /// A string indicating expiry date for the card.
   final String expiryDate;
@@ -487,9 +490,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
-            height: 64,
-          ),
+          
           Expanded(
             flex: widget.isChipVisible ? 2 : 0,
             child: Row(
@@ -512,7 +513,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
           ),
    
           Expanded(
-            flex: 2,
+            
               child: Row(
             children: [
               Padding(
@@ -543,7 +544,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
                     widget.expiryDate.isEmpty
                         ? widget.labelExpiredDate
                         : widget.expiryDate,
-                    style: widget.textStyle ?? defaultTextStyle,
+                    style: widget.expireDateTextStyle ?? defaultTextStyle,
                   ),
                 ],
               ),
@@ -627,14 +628,7 @@ class _CreditCardWidgetState extends State<CreditCardWidget>
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Container(
-              margin: const EdgeInsets.only(top: 16),
-              height: 48,
-              color: Colors.black,
-            ),
-          ),
+          
           Expanded(
             flex: 2,
             child: Container(
