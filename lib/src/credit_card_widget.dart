@@ -55,7 +55,7 @@ class CreditCardWidget extends StatefulWidget {
     this.obscureInitialCardNumber = false,
     this.enableFloatingCard = false,
     this.floatingConfig = const FloatingConfig(),
-    this.expireDateTextStyle
+    this.expireDateTextStyle,
     super.key,
   });
 
